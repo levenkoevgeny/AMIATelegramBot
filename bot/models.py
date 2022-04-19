@@ -5,7 +5,10 @@ from asgiref.sync import async_to_sync
 
 class TelegramUser(models.Model):
     user_id = models.BigAutoField(primary_key=True, verbose_name="User ID")
-    last_name = models.CharField(verbose_name="Фамилия", max_length=100)
+    first_name = models.CharField(verbose_name="Имя", max_length=100, blank=True, null=True)
+    username = models.CharField(verbose_name="Логин", max_length=100, blank=True, null=True)
+    last_name = models.CharField(verbose_name="Фамилия", max_length=100, blank=True, null=True)
+    avatar = models.ImageField(verbose_name="Аватар", upload_to='avatars', blank=True, null=True)
 
     def __str__(self):
         return "{0} {1}".format(str(self.user_id), self.last_name)
