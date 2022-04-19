@@ -8,6 +8,9 @@ django.setup()
 
 from bot.models import TelegramUser
 
+from telebot import apihelper
+
+apihelper.proxy = {'https':'http://levenko:1986@192.168.0.123:8080'}
 
 bot = telebot.TeleBot("5276008496:AAGWfe-mMCvi981zK71G33ViK6K_Dh0QG44", parse_mode=None)
 
@@ -21,9 +24,8 @@ def send_welcome(message):
 
 @bot.message_handler(content_types=["text", "sticker", "pinned_message", "photo", "audio"])
 def function_name(message):
+
     print(message)
-    for i in range(10):
-        bot.send_message(703835446, "Прыуэт!!!")
 
     channel_layer = get_channel_layer()
     async_to_sync(channel_layer.group_send)('messages',
